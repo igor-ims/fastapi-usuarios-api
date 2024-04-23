@@ -1,7 +1,9 @@
 from fastapi import FastAPI, HTTPException
 from db.db import client
-from controllers.usuariosCRUD import router as usuarios_router
+from controller.usuarioCRUD import router as usuarios_router
 
+# Para correr el server:
+# uvicorn main:app --reload
 
 app = FastAPI()
 app.include_router(usuarios_router, tags=["usuarios"], prefix="/usuarios")
@@ -9,6 +11,3 @@ app.include_router(usuarios_router, tags=["usuarios"], prefix="/usuarios")
 @app.on_event("shutdown")
 def shutdown_db_client():
     client.close()
-
-
-
